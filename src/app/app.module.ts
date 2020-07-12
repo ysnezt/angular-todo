@@ -5,10 +5,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TodoListComponent } from './components/todo-list/todo-list.component';
+import {
+  TodoListComponent,
+  DialogContent,
+} from './components/todo-list/todo-list.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
 import { AboutComponent } from './components/about/about.component';
@@ -20,6 +24,7 @@ import { AboutComponent } from './components/about/about.component';
     HeaderComponent,
     TodoDetailsComponent,
     AboutComponent,
+    DialogContent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +34,7 @@ import { AboutComponent } from './components/about/about.component';
     MatTableModule,
     MatCardModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

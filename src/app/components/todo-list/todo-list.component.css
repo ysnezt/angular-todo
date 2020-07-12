@@ -38,3 +38,12 @@ a {
 .mat-row:hover {
   background-color: #ebebeb;
 }
+
+.btn {
+  cursor: pointer;
+  padding: 5px;
+  background-color: darkgrey;
+  border: 0;
+  color: black;
+  border-radius: 8%;
+}

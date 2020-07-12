@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 import { TodoService } from './../services/todo.service';
 import { ITodo } from './../../models/todos';
@@ -16,7 +17,8 @@ export class TodoListComponent implements OnInit {
 
   constructor(
     private todoService: TodoService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -33,4 +35,21 @@ export class TodoListComponent implements OnInit {
       });
     });
   }
+
+  openDialog(todo: ITodo) {
+    const dialogRef = this.dialog.open(DialogContent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteTodo(todo.id);
+      }
+    });
+  }
 }
+
+@Component({
+  selector: 'dialog-content',
+  templateUrl: './dialog-content.html',
+  styleUrls: ['./todo-list.component.css'],
+})
+export class DialogContent {}

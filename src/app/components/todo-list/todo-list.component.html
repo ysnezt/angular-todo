@@ -37,7 +37,7 @@
       Delete
     </mat-header-cell>
     <mat-cell [ngClass]="'w-75'" *matCellDef="let element">
-      <button class="delete-btn" (click)="deleteTodo(element.id)">
+      <button class="delete-btn" (click)="openDialog(element)">
         Delete
       </button>
     </mat-cell>
