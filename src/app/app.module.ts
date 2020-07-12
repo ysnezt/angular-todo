@@ -6,6 +6,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +36,7 @@ import { AboutComponent } from './components/about/about.component';
     MatCardModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
