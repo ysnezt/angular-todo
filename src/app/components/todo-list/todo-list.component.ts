@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { TodoService } from './../services/todo.service';
 import { ITodo } from './../../models/todos';
@@ -37,7 +37,11 @@ export class TodoListComponent implements OnInit {
   }
 
   openDialog(todo: ITodo) {
-    const dialogRef = this.dialog.open(DialogContent);
+    const dialogRef = this.dialog.open(DialogContent, {
+      data: {
+        todo,
+      },
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -52,4 +56,6 @@ export class TodoListComponent implements OnInit {
   templateUrl: './dialog-content.html',
   styleUrls: ['./todo-list.component.css'],
 })
-export class DialogContent {}
+export class DialogContent {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { todo: ITodo }) {}
+}
