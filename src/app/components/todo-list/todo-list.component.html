@@ -1,0 +1,48 @@
+<mat-table [dataSource]="todos" class="mat-elevation-z8">
+  <!-- Number Column -->
+  <ng-container matColumnDef="number">
+    <mat-header-cell [ngClass]="'w-75'" *matHeaderCellDef>
+      No.
+    </mat-header-cell>
+    <mat-cell [ngClass]="'w-75'" *matCellDef="let element">
+      {{ element.id }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Title Column -->
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef>
+      Title
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.title }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Details Column -->
+  <ng-container matColumnDef="details">
+    <mat-header-cell [ngClass]="'w-100'" *matHeaderCellDef>
+      Details
+    </mat-header-cell>
+    <mat-cell [ngClass]="'w-100'" *matCellDef="let element">
+      <a [routerLink]="['/details', element.id]" routerLinkActive="active"
+        >Details</a
+      >
+    </mat-cell>
+  </ng-container>
+
+  <!-- Delete Column -->
+  <ng-container matColumnDef="delete">
+    <mat-header-cell [ngClass]="'w-75'" *matHeaderCellDef>
+      Delete
+    </mat-header-cell>
+    <mat-cell [ngClass]="'w-75'" *matCellDef="let element">
+      <button class="delete-btn" (click)="deleteTodo(element.id)">
+        Delete
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

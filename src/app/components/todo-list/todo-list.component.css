@@ -1,0 +1,40 @@
+.ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: dodgerblue;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.delete-btn {
+  cursor: pointer;
+  padding: 5px;
+  background-color: #db3d3d;
+  border: 0;
+  color: aliceblue;
+  border-radius: 8%;
+}
+
+.delete-btn:hover {
+  background-color: brown;
+}
+
+.w-75 {
+  max-width: 75px;
+}
+
+.w-100 {
+  max-width: 100px;
+}
+
+.w-200 {
+  max-width: 1000px;
+}
+
+.mat-row:hover {
+  background-color: #ebebeb;
+}

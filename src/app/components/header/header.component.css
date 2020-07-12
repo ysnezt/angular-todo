@@ -1,0 +1,11 @@
+.header {
+  padding: 5px;
+  background-color: #4b4848;
+  font-family: "Tahoma";
+  color: aliceblue;
+}
+
+a {
+  text-decoration: none;
+  color: aliceblue;
+}
