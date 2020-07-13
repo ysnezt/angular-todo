@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { TodoService } from './../services/todo.service';
-import { ITodo } from './../../models/todos';
+import { ITodo, initialTodo } from './../../models/todos';
 
 @Component({
   selector: 'app-todo-list',
@@ -27,11 +27,22 @@ export class TodoListComponent implements OnInit {
     });
   }
 
+  addTodo(todo: ITodo) {
+    this.todoService.addTodo({ ...todo }).subscribe((item) => {
+      this.todos = [...this.todos, item];
+      this._snackBar.open('Item created successfully', 'close', {
+        duration: 5000,
+        panelClass: ['successfull-snackbar'],
+      });
+    });
+  }
+
   deleteTodo(id: number): void {
     this.todoService.deleteTodo(id).subscribe((item) => {
       this.todos = this.todos.filter((item) => item.id !== id);
       this._snackBar.open('Item deleted successfully', 'close', {
         duration: 5000,
+        panelClass: ['successfull-snackbar'],
       });
     });
   }
@@ -53,7 +64,7 @@ export class TodoListComponent implements OnInit {
 
 @Component({
   selector: 'dialog-content',
-  templateUrl: './dialog-content.html',
+  templateUrl: './dialog-content.component.html',
   styleUrls: ['./todo-list.component.css'],
 })
 export class DialogContent {

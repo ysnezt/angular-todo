@@ -1,48 +1,55 @@
-<mat-table [dataSource]="todos" class="mat-elevation-z8">
-  <!-- Number Column -->
-  <ng-container matColumnDef="number">
-    <mat-header-cell [ngClass]="'w-75'" *matHeaderCellDef>
-      No.
-    </mat-header-cell>
-    <mat-cell [ngClass]="'w-75'" *matCellDef="let element">
-      {{ element.id }}
-    </mat-cell>
-  </ng-container>
+<div>
+  <app-add-todo-form (addTodo)="addTodo($event)"></app-add-todo-form>
+  <mat-table [dataSource]="todos" class="mat-elevation-z8">
+    <!-- Number Column -->
+    <ng-container matColumnDef="number">
+      <mat-header-cell [ngClass]="'w-75'" *matHeaderCellDef>
+        No.
+      </mat-header-cell>
+      <mat-cell [ngClass]="'w-75'" *matCellDef="let element; let index = index">
+        {{ index + 1 }}
+      </mat-cell>
+    </ng-container>
 
-  <!-- Title Column -->
-  <ng-container matColumnDef="title">
-    <mat-header-cell *matHeaderCellDef>
-      Title
-    </mat-header-cell>
-    <mat-cell *matCellDef="let element">
-      {{ element.title }}
-    </mat-cell>
-  </ng-container>
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef>
+        Title
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.title }}
+      </mat-cell>
+    </ng-container>
 
-  <!-- Details Column -->
-  <ng-container matColumnDef="details">
-    <mat-header-cell [ngClass]="'w-100'" *matHeaderCellDef>
-      Details
-    </mat-header-cell>
-    <mat-cell [ngClass]="'w-100'" *matCellDef="let element">
-      <a [routerLink]="['/details', element.id]" routerLinkActive="active"
-        >Details</a
+    <!-- Details Column -->
+    <ng-container matColumnDef="details">
+      <mat-header-cell [ngClass]="'w-100'" *matHeaderCellDef>
+        Details
+      </mat-header-cell>
+      <mat-cell [ngClass]="'w-100'" *matCellDef="let element">
+        <a [routerLink]="['/details', element.id]" routerLinkActive="active"
+          >Details</a
+        >
+      </mat-cell>
+    </ng-container>
+
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <mat-header-cell
+        style="text-align: center;"
+        [ngClass]="'w-75'"
+        *matHeaderCellDef
       >
-    </mat-cell>
-  </ng-container>
-
-  <!-- Delete Column -->
-  <ng-container matColumnDef="delete">
-    <mat-header-cell [ngClass]="'w-75'" *matHeaderCellDef>
-      Delete
-    </mat-header-cell>
-    <mat-cell [ngClass]="'w-75'" *matCellDef="let element">
-      <button class="delete-btn" (click)="openDialog(element)">
         Delete
-      </button>
-    </mat-cell>
-  </ng-container>
+      </mat-header-cell>
+      <mat-cell [ngClass]="'w-75'" *matCellDef="let element">
+        <button mat-raised-button color="warn" (click)="openDialog(element)">
+          Delete
+        </button>
+      </mat-cell>
+    </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-</mat-table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>

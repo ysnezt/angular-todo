@@ -7,6 +7,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +19,7 @@ import {
 import { HeaderComponent } from './components/header/header.component';
 import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
 import { AboutComponent } from './components/about/about.component';
+import { AddTodoFormComponent } from './components/forms/add-todo-form/add-todo-form.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import { AboutComponent } from './components/about/about.component';
     TodoDetailsComponent,
     AboutComponent,
     DialogContent,
+    AddTodoFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,8 @@ import { AboutComponent } from './components/about/about.component';
     MatSnackBarModule,
     MatDialogModule,
     MatDividerModule,
+    ReactiveFormsModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -44,4 +44,18 @@ export class TodoService {
 
     return userData;
   }
+
+  addTodo(todo: ITodo): Observable<any> {
+    const todoData = this.http.post(
+      `https://jsonplaceholder.typicode.com/todos`,
+      todo,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      }
+    );
+
+    return todoData;
+  }
 }
