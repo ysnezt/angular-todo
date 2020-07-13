@@ -14,6 +14,7 @@ import { ITodo, initialTodo } from './../../models/todos';
 export class TodoListComponent implements OnInit {
   todos: ITodo[] = [];
   displayedColumns: string[] = ['number', 'title', 'details', 'delete'];
+  isLoading: boolean = false;
 
   constructor(
     private todoService: TodoService,
@@ -22,14 +23,18 @@ export class TodoListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.todoService.getTodoCollection().subscribe((todos) => {
-      this.todos = todos;
+      this.todos = todos as ITodo[];
+      this.isLoading = false;
     });
   }
 
   addTodo(todo: ITodo) {
+    this.isLoading = true;
     this.todoService.addTodo({ ...todo }).subscribe((item) => {
-      this.todos = [...this.todos, item];
+      this.todos = [item, ...this.todos];
+      this.isLoading = false;
       this._snackBar.open('Item created successfully', 'close', {
         duration: 5000,
         panelClass: ['successfull-snackbar'],
@@ -38,7 +43,7 @@ export class TodoListComponent implements OnInit {
   }
 
   deleteTodo(id: number): void {
-    this.todoService.deleteTodo(id).subscribe((item) => {
+    this.todoService.deleteTodo(id).subscribe(() => {
       this.todos = this.todos.filter((item) => item.id !== id);
       this._snackBar.open('Item deleted successfully', 'close', {
         duration: 5000,
@@ -54,7 +59,7 @@ export class TodoListComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.beforeClosed().subscribe((result) => {
       if (result) {
         this.deleteTodo(todo.id);
       }
@@ -68,5 +73,7 @@ export class TodoListComponent implements OnInit {
   styleUrls: ['./todo-list.component.css'],
 })
 export class DialogContent {
+  isLoading: boolean = false;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: { todo: ITodo }) {}
 }

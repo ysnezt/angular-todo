@@ -1,5 +1,6 @@
 <div>
   <app-add-todo-form (addTodo)="addTodo($event)"></app-add-todo-form>
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
   <mat-table [dataSource]="todos" class="mat-elevation-z8">
     <!-- Number Column -->
     <ng-container matColumnDef="number">
@@ -23,27 +24,39 @@
 
     <!-- Details Column -->
     <ng-container matColumnDef="details">
-      <mat-header-cell [ngClass]="'w-100'" *matHeaderCellDef>
+      <mat-header-cell
+        style="text-align: center; justify-content: center;"
+        [ngClass]="'w-130'"
+        *matHeaderCellDef
+      >
         Details
       </mat-header-cell>
-      <mat-cell [ngClass]="'w-100'" *matCellDef="let element">
-        <a [routerLink]="['/details', element.id]" routerLinkActive="active"
-          >Details</a
-        >
+      <mat-cell
+        style="text-align: center; justify-content: center;"
+        [ngClass]="'w-130'"
+        *matCellDef="let element"
+      >
+        <a [routerLink]="['/details', element.id]" routerLinkActive="active">
+          <button mat-button>
+            <mat-icon style="font-size: 20px;">edit</mat-icon>
+            Details
+          </button>
+        </a>
       </mat-cell>
     </ng-container>
 
     <!-- Delete Column -->
     <ng-container matColumnDef="delete">
       <mat-header-cell
-        style="text-align: center;"
-        [ngClass]="'w-75'"
+        style="text-align: center; justify-content: center;"
+        [ngClass]="'w-100'"
         *matHeaderCellDef
       >
         Delete
       </mat-header-cell>
-      <mat-cell [ngClass]="'w-75'" *matCellDef="let element">
-        <button mat-raised-button color="warn" (click)="openDialog(element)">
+      <mat-cell [ngClass]="'w-100'" *matCellDef="let element">
+        <button mat-button color="warn" (click)="openDialog(element)">
+          <mat-icon style="font-size: 20px;">delete</mat-icon>
           Delete
         </button>
       </mat-cell>

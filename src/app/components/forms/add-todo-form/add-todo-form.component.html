@@ -13,4 +13,13 @@
   >
     Add Todo
   </button>
+
+  <button
+    mat-icon-button
+    color="primary"
+    (click)="clearCreateForm()"
+    [disabled]="!todoName.valid"
+  >
+    <mat-icon>clear</mat-icon>
+  </button>
 </div>

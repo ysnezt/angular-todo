@@ -29,3 +29,9 @@ export const initialUser: IUser = {
   phone: '',
   website: '',
 };
+
+export interface ISnackbarError {
+  message: string;
+  status: number;
+  url: string;
+}

@@ -13,6 +13,7 @@ export class TodoDetailsComponent implements OnInit {
   id: string;
   todoDetails: ITodo = { ...initialTodo };
   user: IUser = { ...initialUser };
+  isLoading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,14 +21,15 @@ export class TodoDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.route.paramMap.subscribe((params) => {
       this.id = params.get('id');
     });
 
     this.todoService.getTodoById(this.id).subscribe((item) => {
-      this.todoDetails = item;
-
       this.todoService.getUserById(item.userId).subscribe((user) => {
+        this.isLoading = false;
+        this.todoDetails = item;
         this.user = user;
       });
     });

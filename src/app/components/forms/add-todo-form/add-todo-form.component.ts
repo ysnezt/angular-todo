@@ -23,4 +23,8 @@ export class AddTodoFormComponent implements OnInit {
       userId: 1,
     });
   }
+
+  clearCreateForm() {
+    this.todoName.setValue('');
+  }
 }

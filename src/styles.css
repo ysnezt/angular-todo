@@ -19,3 +19,12 @@
 .error-snackbar button {
   color: aliceblue;
 }
+
+.warning-snackbar {
+  background: orange;
+  color: aliceblue;
+}
+
+.warning-snackbar button {
+  color: aliceblue;
+}

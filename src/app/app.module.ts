@@ -9,6 +9,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,6 +45,8 @@ import { AddTodoFormComponent } from './components/forms/add-todo-form/add-todo-
     MatDividerModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatIconModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
