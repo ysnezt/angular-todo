@@ -32,7 +32,7 @@ export class TodoListComponent implements OnInit {
 
   addTodo(todo: ITodo) {
     this.isLoading = true;
-    this.todoService.addTodo({ ...todo }).subscribe((item) => {
+    this.todoService.addTodo(todo).subscribe((item: ITodo) => {
       this.todos = [item, ...this.todos];
       this.isLoading = false;
       this._snackBar.open('Item created successfully', 'close', {
@@ -43,13 +43,26 @@ export class TodoListComponent implements OnInit {
   }
 
   deleteTodo(id: number): void {
+    this.isLoading = true;
     this.todoService.deleteTodo(id).subscribe(() => {
       this.todos = this.todos.filter((item) => item.id !== id);
+      this.isLoading = false;
       this._snackBar.open('Item deleted successfully', 'close', {
         duration: 5000,
         panelClass: ['successfull-snackbar'],
       });
     });
+  }
+
+  searchTodo(input: string) {
+    this.isLoading = true;
+    this.todoService.getTodoCollection().subscribe((todos) => {
+      this.todos = todos.filter((todo) =>
+        todo.title.toLowerCase().startsWith(input.toLowerCase())
+      );
+    });
+
+    this.isLoading = false;
   }
 
   openDialog(todo: ITodo) {
@@ -59,7 +72,7 @@ export class TodoListComponent implements OnInit {
       },
     });
 
-    dialogRef.beforeClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.deleteTodo(todo.id);
       }
@@ -73,7 +86,5 @@ export class TodoListComponent implements OnInit {
   styleUrls: ['./todo-list.component.css'],
 })
 export class DialogContent {
-  isLoading: boolean = false;
-
   constructor(@Inject(MAT_DIALOG_DATA) public data: { todo: ITodo }) {}
 }

@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +24,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
 import { AboutComponent } from './components/about/about.component';
 import { AddTodoFormComponent } from './components/forms/add-todo-form/add-todo-form.component';
+import { SearchTodoFormComponent } from './components/forms/search-todo-form/search-todo-form.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { AddTodoFormComponent } from './components/forms/add-todo-form/add-todo-
     AboutComponent,
     DialogContent,
     AddTodoFormComponent,
+    SearchTodoFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,8 @@ import { AddTodoFormComponent } from './components/forms/add-todo-form/add-todo-
     MatButtonModule,
     MatIconModule,
     MatProgressBarModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

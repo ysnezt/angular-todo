@@ -1,5 +1,10 @@
 <div>
   <app-add-todo-form (addTodo)="addTodo($event)"></app-add-todo-form>
+
+  <app-search-todo-form
+    (searchTodo)="searchTodo($event)"
+  ></app-search-todo-form>
+
   <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
   <mat-table [dataSource]="todos" class="mat-elevation-z8">
     <!-- Number Column -->

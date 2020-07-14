@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 import { ITodo, initialTodo, IUser, initialUser } from './../../models/todos';
 import { TodoService } from './../services/todo.service';
@@ -14,6 +16,8 @@ export class TodoDetailsComponent implements OnInit {
   todoDetails: ITodo = { ...initialTodo };
   user: IUser = { ...initialUser };
   isLoading: boolean = false;
+
+  testResult: Observable<{}>;
 
   constructor(
     private route: ActivatedRoute,
