@@ -20,7 +20,6 @@ export class AddTodoFormComponent implements OnInit {
     this.addTodo.emit({
       ...initialTodo,
       title: this.todoName.value,
-      userId: 1,
     });
   }
 

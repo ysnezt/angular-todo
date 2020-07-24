@@ -6,13 +6,16 @@
   ></app-search-todo-form>
 
   <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
-  <mat-table [dataSource]="todos" class="mat-elevation-z8">
+  <mat-table [dataSource]="todos | async" class="mat-elevation-z8">
     <!-- Number Column -->
     <ng-container matColumnDef="number">
-      <mat-header-cell [ngClass]="'w-75'" *matHeaderCellDef>
+      <mat-header-cell [ngClass]="'w-100'" *matHeaderCellDef>
         No.
       </mat-header-cell>
-      <mat-cell [ngClass]="'w-75'" *matCellDef="let element; let index = index">
+      <mat-cell
+        [ngClass]="'w-100'"
+        *matCellDef="let element; let index = index"
+      >
         {{ index + 1 }}
       </mat-cell>
     </ng-container>

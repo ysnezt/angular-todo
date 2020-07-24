@@ -1,15 +1,12 @@
 export interface ITodo {
-  userId: number;
-  id: number;
+  id?: string;
   title: string;
-  completed: boolean;
+  user: string;
 }
 
 export const initialTodo: ITodo = {
-  userId: 0,
-  id: 0,
   title: '',
-  completed: false,
+  user: '',
 };
 
 export interface IUser {

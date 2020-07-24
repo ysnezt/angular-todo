@@ -4,14 +4,8 @@
     <h2>TODO-DETAILS</h2>
 
     <p style="margin-top: -10px;"><b>Title: </b>{{ todoDetails.title }}</p>
+    <p style="margin-top: -10px;"><b>User: </b>{{ todoDetails.user }}</p>
     <br />
-    <mat-divider></mat-divider>
-    <br />
-    <h2>USER-DETAILS</h2>
-    <p style="margin-top: -10px;"><b>Name: </b>{{ user.name }}</p>
-    <p><b>E-mail: </b>{{ user.email }}</p>
-    <p><b>Phone: </b>{{ user.phone }}</p>
-    <p><b>Website: </b>{{ user.website }}</p>
   </div>
   <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
 </mat-card>

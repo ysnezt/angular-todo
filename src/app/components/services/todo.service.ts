@@ -1,40 +1,46 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument,
+} from '@angular/fire/firestore';
 
 import { ITodo, IUser } from './../../models/todos';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
-  constructor(private http: HttpClient) {}
+  itemsCollection: AngularFirestoreCollection<ITodo>;
 
-  getTodoCollection(): Observable<ITodo[]> {
-    const collectionData = this.http.get<ITodo[]>(
-      'https://jsonplaceholder.typicode.com/todos?_limit=10'
+  constructor(private http: HttpClient, private firebase: AngularFirestore) {}
+
+  getTodoCollection() {
+    const collection = (this.firebase.collection(
+      'items'
+    ) as AngularFirestoreCollection<ITodo>).snapshotChanges();
+    return collection.pipe(
+      map((actions) =>
+        actions.map((action) => {
+          const data = action.payload.doc.data() as ITodo;
+          const id = action.payload.doc.id;
+          return { id, ...data };
+        })
+      )
     );
-
-    return collectionData;
   }
 
-  getTodoById(id: string): Observable<ITodo> {
-    const todoData = this.http.get<ITodo>(
-      `https://jsonplaceholder.typicode.com/todos/${id}`
-    );
-
-    return todoData;
+  getTodoById(id: string) {
+    return this.firebase.doc<ITodo>(`items/${id}`).valueChanges();
   }
 
-  deleteTodo(id: number): Observable<any> {
-    return this.http.delete(
-      `https://jsonplaceholder.typicode.com/todos/${id}`,
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-        }),
-      }
-    );
+  deleteTodo(id: string) {
+    (this.firebase.doc(`items/${id}`) as AngularFirestoreDocument<
+      any
+    >).delete();
   }
 
   getUserById(id: number): Observable<IUser> {
@@ -45,17 +51,9 @@ export class TodoService {
     return userData;
   }
 
-  addTodo(todo: ITodo): Observable<any> {
-    const todoData = this.http.post(
-      `https://jsonplaceholder.typicode.com/todos`,
-      todo,
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-        }),
-      }
-    );
-
-    return todoData;
+  addTodo(todo: ITodo) {
+    (this.firebase.collection('items') as AngularFirestoreCollection<
+      ITodo
+    >).add({ ...todo, user: 'Yasin' });
   }
 }

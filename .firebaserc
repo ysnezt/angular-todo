@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-project-ec466": {
+      "hosting": {
+        "todo-list": [
+          "angular-project-ec466"
+        ]
+      }
+    }
+  }
+}

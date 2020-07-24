@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 import { ITodo, initialTodo, IUser, initialUser } from './../../models/todos';
@@ -31,11 +31,9 @@ export class TodoDetailsComponent implements OnInit {
     });
 
     this.todoService.getTodoById(this.id).subscribe((item) => {
-      this.todoService.getUserById(item.userId).subscribe((user) => {
-        this.isLoading = false;
-        this.todoDetails = item;
-        this.user = user;
-      });
+      this.todoDetails = item;
     });
+
+    this.isLoading = false;
   }
 }

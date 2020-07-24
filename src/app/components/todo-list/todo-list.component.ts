@@ -4,6 +4,8 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { TodoService } from './../services/todo.service';
 import { ITodo, initialTodo } from './../../models/todos';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todo-list',
@@ -12,7 +14,7 @@ import { ITodo, initialTodo } from './../../models/todos';
   providers: [],
 })
 export class TodoListComponent implements OnInit {
-  todos: ITodo[] = [];
+  todos: Observable<ITodo[]>;
   displayedColumns: string[] = ['number', 'title', 'details', 'delete'];
   isLoading: boolean = false;
 
@@ -24,44 +26,46 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.todoService.getTodoCollection().subscribe((todos) => {
-      this.todos = todos as ITodo[];
-      this.isLoading = false;
-    });
+    this.todos = this.todoService.getTodoCollection();
+    this.isLoading = false;
   }
 
   addTodo(todo: ITodo) {
     this.isLoading = true;
-    this.todoService.addTodo(todo).subscribe((item: ITodo) => {
-      this.todos = [item, ...this.todos];
-      this.isLoading = false;
-      this._snackBar.open('Item created successfully', 'close', {
-        duration: 5000,
-        panelClass: ['successfull-snackbar'],
-      });
+
+    this.todoService.addTodo(todo);
+
+    this.isLoading = false;
+    this._snackBar.open('Item created successfully', 'close', {
+      duration: 5000,
+      panelClass: ['successfull-snackbar'],
     });
   }
 
-  deleteTodo(id: number): void {
+  deleteTodo(id: string) {
     this.isLoading = true;
-    this.todoService.deleteTodo(id).subscribe(() => {
-      this.todos = this.todos.filter((item) => item.id !== id);
-      this.isLoading = false;
-      this._snackBar.open('Item deleted successfully', 'close', {
-        duration: 5000,
-        panelClass: ['successfull-snackbar'],
-      });
+
+    this.todoService.deleteTodo(id);
+
+    this.isLoading = false;
+
+    this._snackBar.open('Item deleted successfully', 'close', {
+      duration: 5000,
+      panelClass: ['successfull-snackbar'],
     });
   }
 
   searchTodo(input: string) {
     this.isLoading = true;
-    this.todoService.getTodoCollection().subscribe((todos) => {
-      this.todos = todos.filter((todo) =>
-        todo.title.toLowerCase().startsWith(input.toLowerCase())
+    this.todos = this.todoService
+      .getTodoCollection()
+      .pipe(
+        map((actions) =>
+          actions.filter((item) =>
+            item.title.toLowerCase().startsWith(input.toLowerCase())
+          )
+        )
       );
-    });
-
     this.isLoading = false;
   }
 
